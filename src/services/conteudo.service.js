@@ -6,6 +6,7 @@ const materiaExiste = async (materiaId) => {
             id: Number(materiaId)
         }
     });
+
     return !!materia;
 };
 
@@ -15,6 +16,7 @@ const conteudoExiste = async (id) => {
             id: Number(id)
         }
     });
+
     return !!conteudo;
 };
 
@@ -23,9 +25,14 @@ const conteudoDuplicadoNaMateria = async (titulo, materiaId, idAtual = null) => 
         where: {
             titulo: titulo.trim(),
             materiaId: Number(materiaId),
-            ...(idAtual && { NOT: { id: Number(idAtual) } })
+            ...(idAtual && {
+                NOT: {
+                    id: Number(idAtual)
+                }
+            })
         }
     });
+
     return !!conteudo;
 };
 

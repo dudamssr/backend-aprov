@@ -1,7 +1,7 @@
 const prisma = require("../data/prisma");
 const jwt = require("jsonwebtoken");
 
-const SECRET_KEY = process.env.JWT_SECRET || "sua_chave_secreta_aqui";
+const SECRET_KEY = process.env.JWT_SECRET || "girlsproject";
 
 const adicionar = async (req, res) => {
     try {
@@ -29,17 +29,22 @@ const adicionar = async (req, res) => {
                 email,
                 senha,
                 tipo: tipo ? tipo.toUpperCase() : "ALUNO"
+            },
+            select: {
+                id: true,
+                nome: true,
+                email: true,
+                tipo: true,
+                dataCadastro: true
             }
         });
-
-        delete novoUsuario.senha;
 
         return res.status(201).json({
             mensagem: "Usuário cadastrado com sucesso!",
             usuario: novoUsuario
         });
     } catch (erro) {
-        console.error("Erro ao adicionar usuário:", erro);
+        console.error("Erro detalhado no cadastro:", erro);
         return res.status(500).json({
             erro: "Erro interno no servidor ao cadastrar usuário."
         });
