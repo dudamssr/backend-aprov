@@ -15,7 +15,8 @@ const questaoRoutes = require('./src/routes/questao.routes');
 const alternativaRoutes = require('./src/routes/alternativa.routes');
 const flashcardUsuarioRoutes = require('./src/routes/flashcardUsuario.routes');
 const respostaRoutes = require('./src/routes/resposta.routes');
-
+const agendaRoutes = require("./src/routes/agenda.routes");
+app.use("/agenda", agendaRoutes);
 app.use('/flashcards', flashcardRoutes);
 app.use('/materia', materiaRoutes);
 app.use('/simulado', simuladoRoutes);

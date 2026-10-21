@@ -3,8 +3,7 @@ generator client {
 }
 
 datasource db {
-  provider = "mysql" 
- 
+  provider = "mysql"
 }
 
 model Usuario {
@@ -17,6 +16,7 @@ model Usuario {
 
   simulados  Simulado[]
   flashcards FlashcardUsuario[]
+  agendaTarefas AgendaTarefa[]
 }
 
 model Materia {
@@ -117,4 +117,19 @@ model FlashcardUsuario {
 
   usuario   Usuario   @relation(fields: [usuarioId], references: [id])
   flashcard Flashcard @relation(fields: [flashcardId], references: [id])
+}
+
+model AgendaTarefa {
+  id         Int      @id @default(autoincrement())
+  titulo     String
+  data       DateTime
+  horario    String
+  materia    String
+  tipo       String
+  prioridade String
+  concluida  Boolean  @default(false)
+  usuarioId  Int
+  usuario    Usuario  @relation(fields: [usuarioId], references: [id])
+
+  @@map("agenda_tarefas")
 }
